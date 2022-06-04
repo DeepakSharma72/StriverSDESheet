@@ -1,4 +1,6 @@
 #include <bits/stdc++.h> 
+using namespace std;
+
 void setZeros(vector<vector<int>> &matrix)
 {
     int R = matrix.size(), C = matrix[0].size();
