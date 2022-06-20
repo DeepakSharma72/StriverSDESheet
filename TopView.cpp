@@ -1,38 +1,42 @@
-/*************************************************************
- 
-    Following is the Binary Tree node structure.
+/************************************************************
 
-    class BinaryTreeNode 
-    {
-    public : 
-        T data;
-        BinaryTreeNode<T> *left;
-        BinaryTreeNode<T> *right;
+    Following is the TreeNode class structure:
 
-        BinaryTreeNode(T data) {
-            this -> data = data;
+    template <typename T>
+    class TreeNode {
+       public:
+        T val;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T val) {
+            this->val = val;
             left = NULL;
             right = NULL;
         }
     };
 
-*************************************************************/
-#include<vector>
-vector<int> bottomView(BinaryTreeNode<int> * root){
-    vector<int> res;
+************************************************************/
+#include<queue>
+#include<map>
+vector<int> getTopView(TreeNode<int> *root) {
+        vector<int> res;
     map<int,int> mp;
     if(root == NULL)
         return res;
     
-    queue<pair<BinaryTreeNode<int>*,int>> q;
+    queue<pair<TreeNode<int>*,int>> q;
     q.push({root,0});
-    mp[0] = root->data;
+    mp[0] = root->val;
     while(!q.empty())
     {
         int key = q.front().second;
-        BinaryTreeNode<int>* node = q.front().first;
+        TreeNode<int>* node = q.front().first;
         q.pop();
-        mp[key] = node->data;
+        
+        if(mp.find(key) == mp.end())
+        mp[key] = node->val;;
+        
         if(node->left)
         {
             q.push({node->left,key-1});
